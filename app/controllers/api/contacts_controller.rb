@@ -3,4 +3,5 @@ class Api::ContactsController < ApplicationController
     @contact = Contact.first
     render 'contact_view.json.jbuilder'
   end  
+  
 end
