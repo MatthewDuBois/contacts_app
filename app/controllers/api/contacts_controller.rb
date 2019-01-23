@@ -13,8 +13,11 @@ def create
                           phone_number: params[:phone_number],
                           bio: params[:bio]
                         )
-    @contact.save
-    render 'show.json.jbuilder'
+    if @contact.save
+      render 'show.json.jbuilder'
+    else
+      render json: {errors: @contact.errors.full_messages}, status: :unprocessable_entity
+    end  
   end
 
 def show
@@ -33,8 +36,11 @@ def show
     @contact.bio = params[:bio] || @contact.bio
 
 
-    @contact.save
-    render 'show.json.jbuilder'
+    if @contact.save
+      render 'show.json.jbuilder'
+    else
+      render json: {errors: @contact.errors.full_messages}, status: :unprocessable_entity
+    end  
   end  
 
   def destroy
